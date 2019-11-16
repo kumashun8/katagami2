@@ -77,11 +77,12 @@ class Friends extends Component {
 
 }
 
-const FriendLIst = () => (
+const FriendLIst = props => (
   <>
     {FRIENDS.map(friend => (
       <li key={friend.id}>
         <Link to={`/friends/${friend.id}`}>{friend.nameJa}</Link>
+        <button onClick={() => props.handleVote(friend.id)}>+</button>
       </li>
     ))}
   </>
@@ -90,6 +91,7 @@ const FriendLIst = () => (
 const Friend = props => {
   const { id } = props.match.params;
   const friend = friendById(id);
+  const vote = props.votes[id];
 
   if (typeof friend === 'undefined') {
     return (
@@ -113,6 +115,7 @@ const Friend = props => {
         <h1 style={contentStyle}>{friend.nameJa}</h1>
         <p style={contentStyle}>{friend.nameEn}</p>
       </div>
+      <h1>Vote: {vote}</h1>
     </>
   );
 
