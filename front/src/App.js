@@ -44,4 +44,27 @@ const Friends = () => (
   </>
 );
 
-export default App
+const FRIENDS = [
+  {
+    id: 'serval',
+    nameJa: 'サーバル',
+    nameEn: 'Serval Cat',
+    family: 'ネコ目ネコ科ネコ属'
+  },
+  {
+    id: 'reccoon',
+    nameJa: 'アライグマ',
+    nameEn: 'Common raccoon',
+    family: 'ネコ目アライグマ科アライグマ属'
+  },
+  {
+    id: 'fennec',
+    nameJa: 'フェネック',
+    nameEn: 'Fennec',
+    family: 'ネコ目イヌ科キツネ属'
+  }
+];
+
+const friendById = id => FRIENDS.find(friend => friend.id === id);
+
+export default App;
