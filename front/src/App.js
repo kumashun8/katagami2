@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import { 
   BrowserRouter,
   Route,
-  Link
+  Link,
+  NavLink
 } from 'react-router-dom';
 
 const App = () => (
   <BrowserRouter>
     <>
       <ul>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/about'>About</Link></li>
-        <li><Link to='/friends'>Friends</Link></li>
+        <li><NavLink activeStyle={{color: 'red'}} exact to='/'>Home</NavLink></li>
+        <li><NavLink activeStyle={{color: 'red'}} to='/about'>About</NavLink></li>
+        <li><NavLink activeStyle={{color: 'red'}} to='/friends'>Friends</NavLink></li>
       </ul>
 
       <hr />
