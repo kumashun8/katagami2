@@ -37,13 +37,45 @@ const About = () => (
   </>
 );
 
-const Friends = () => (
-  <>
-    <h2>Friends</h2>
-    <Route exact path='/friends' component={FriendLIst} />
-    <Route path='/friends/:id' component={Friend} />
-  </>
-);
+class Friends extends Component {
+  constructor() {
+    super();
+    this.state = {};
+    this.handleVote = this.handleVote.bind(this);
+  };
+
+  componentDidMount() {
+    FRIENDS.forEach(friend => {
+      this.setState({
+        ...this.state,
+        [friend.id]: 0
+      })
+    });
+  };
+
+  handleVote(id) {
+    this.setState({
+      [id]: this.state[id] + 1
+    });
+  };
+
+  render() {
+    return (
+      <>
+        <h2>Friends</h2>
+        <Route
+          exact path='/friends'
+          render={props => <FriendLIst handleVote={this.handleVote} />}
+        />
+        <Route
+          path='/friends/:id'
+          render={props => <Friend match={props.match} votes={this.state} />}
+        />
+      </>
+    )
+  }
+
+}
 
 const FriendLIst = () => (
   <>
