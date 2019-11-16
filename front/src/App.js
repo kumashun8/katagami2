@@ -40,9 +40,51 @@ const About = () => (
 const Friends = () => (
   <>
     <h2>Friends</h2>
-    <p>ここにフレンズのリストを書きます</p>
+    <Route exact path='/friends' component={FriendLIst} />
+    <Route path='/friends/:id' component={Friend} />
   </>
 );
+
+const FriendLIst = () => (
+  <>
+    {FRIENDS.map(friend => (
+      <li key={friend.id}>
+        <Link to={`/friends/${friend.id}`}>{friend.nameJa}</Link>
+      </li>
+    ))}
+  </>
+);
+
+const Friend = props => {
+  const { id } = props.match.params;
+  const friend = friendById(id);
+
+  if (typeof friend === 'undefined') {
+    return (
+      <>
+        <p>Friend with id '{id}' does not exist.</p>
+      </>
+    );
+  }
+
+  const containerStyle = {
+    border: '1px gray solid',
+    display: 'inline-block',
+    padding: 10
+  };
+  const contentStyle = { margin: 0 };
+
+  return (
+    <>
+      <div style={containerStyle}>
+        <p style={contentStyle}>{friend.family}</p>
+        <h1 style={contentStyle}>{friend.nameJa}</h1>
+        <p style={contentStyle}>{friend.nameEn}</p>
+      </div>
+    </>
+  );
+
+};
 
 const FRIENDS = [
   {
