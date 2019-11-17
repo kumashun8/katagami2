@@ -5,6 +5,7 @@ import {
   Link,
   NavLink
 } from 'react-router-dom';
+import ApiGetter from './ApiGetter';
 
 const App = () => (
   <BrowserRouter>
@@ -28,6 +29,7 @@ const Home = () => (
   <>
     <h2>About</h2>
     <p>Welcome to ようこそ</p>
+    <ApiGetter />
   </>
 );
 
