@@ -9,9 +9,10 @@ export default class extends Component {
   }
 
   componentDidMount(){
-    return fetch('https://api.github.com/users/defunkt')
+    return fetch('http://localhost:3001/members/index')
       .then((response) => response.json())
       .then((responseJson) => {
+        console.log(responseJson);
         this.setState({
           loading: true,
           data: responseJson,
@@ -25,10 +26,11 @@ export default class extends Component {
   render() {
     if (this.state.loading) {
       return(
-        <div className="App-header">
-          <h1>{this.state.data.login}</h1>
-          <p>{this.state.data.name}, {this.state.data.public_repos}repos</p>
-        </div>
+        <ul className="App-header">
+          {this.state.data.map(member => (
+            <li key={member.id}>{member.name}, {member.age}</li>
+          ))}
+        </ul>
       );
     }else{
       return (
