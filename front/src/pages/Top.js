@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MemberList from 'components/lv4/MemberList';
-import ApiPoster from 'components/lv4/ApiPoster';
+import MemberForm from 'components/lv4/MemberForm';
 import { fetchMembers, postMember } from 'lib/api';
 
 const useStyles = makeStyles(theme => ({
@@ -17,11 +17,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function () {
   const classes = useStyles();
-  const [name, setName] = useState('');
-  const [age, setAge] = useState(' ');
+  const [name,    setName   ] = useState('');
+  const [age,     setAge    ] = useState('');
   const [loading, setLoading] = useState(false);
   const [members, setMembers] = useState([]);
-  const [memberCount, setMemberCount] = useState(0);
+  const [latest,  setLatest ] = useState(true);
 
   useEffect(() => {
     const handleGetMembers = members => {
@@ -30,12 +30,25 @@ export default function () {
     }
     setLoading(true);
     fetchMembers(handleGetMembers);
-  }, [memberCount]);
+  }, [latest]);
 
   return (
     <div>
-      <MemberList loading={loading} members={members} />
-      {/* <ApiPoster /> */}
+      <MemberList
+        loading={loading}
+        members={members}
+      />
+      <MemberForm
+        classes={classes}
+        handleChangeName={setName}
+        handleChangeAge={setAge}
+        handlePost={() =>
+          postMember({
+            name,
+            age,
+            setLatest
+          })}
+      />
     </div>
   );
 }

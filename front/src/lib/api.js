@@ -13,9 +13,14 @@ export const fetchMembers = handleGetMembers => {
 };
 
 export const postMember = props => {
+  const {
+    name,
+    age,
+    setLatest
+  } = props;
+
   const method = 'POST';
   const body = new FormData();
-  const { name, age } = props;
   body.append('name', name);
   body.append('age', age);
 
@@ -26,6 +31,7 @@ export const postMember = props => {
     .then(response => response.json())
     .then(responseJson => {
       console.log(responseJson);
+      setLatest(false);
     })
     .catch(error => {
       console.error(error);

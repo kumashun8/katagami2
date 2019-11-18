@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   protect_from_forgery
 
   def index
-    @members = Member.all
+    @members = Member.order(created_at: "DESC")
     render :json => @members
   end
 
