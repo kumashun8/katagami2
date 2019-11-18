@@ -1,43 +1,30 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { fetchMembers } from 'lib/api';
 
-export default class extends Component {
-  constructor(props) {
-    super(props);
-    this.state={
-      loading: false
-    };
-  }
+export default function() {
+  const [loading, setLoading] = useState(false);
+  const [members, setMembers] = useState([]);
+  const [memberCount, setMemberCount] = useState(0);
 
-  componentDidMount(){
-    return fetch('http://localhost:3001/members')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson);
-        this.setState({
-          loading: true,
-          data: responseJson,
-        });
-      })
-      .catch((error) =>{
-        console.error(error);
-      });
-  }
-
-  render() {
-    if (this.state.loading) {
-      return(
-        <ul className="App-header">
-          {this.state.data.map(member => (
-            <li key={member.id}>{member.name}, {member.age}</li>
-          ))}
-        </ul>
-      );
-    }else{
-      return (
-        <div className="App-header">
-          <p>Loading...</p>
-        </div>
-      );
+  useEffect(() => {
+    const handleGetMembers = members => {
+      setMembers(members);
+      setLoading(true);
     }
+    fetchMembers(handleGetMembers);
+  }, [memberCount]);
+
+  if (loading) {
+    return (
+      <ul className="App-header">
+        {members.map(member => (
+          <li key={member.id}>{member.name}, {member.age}</li>
+        ))}
+      </ul>
+    );
   }
+
+  return (
+    <p>Loading...</p>
+  );
 }
