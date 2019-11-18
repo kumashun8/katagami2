@@ -5,7 +5,7 @@ import {
   Link,
   NavLink
 } from 'react-router-dom';
-import ApiGetter from './ApiGetter';
+import ApiGetter from '~/ApiGetter';
 
 const App = () => (
   <BrowserRouter>
