@@ -12,23 +12,22 @@ export const fetchMembers = handleGetMembers => {
       });
 };
 
-// export const postMember = (name, age) => {
-//   e.preventDefault();
-//   const method = 'POST';
-//   const body = new FormData();
+export const postMember = props => {
+  const method = 'POST';
+  const body = new FormData();
+  const { name, age } = props;
+  body.append('name', name);
+  body.append('age', age);
 
-//   body.append('name', name);
-//   body.append('age', age);
-
-//   return fetch('http://localhost:3001/members', {
-//     method,
-//     body
-//   })
-//     .then(response => response.json())
-//     .then(responseJson => {
-//       console.log(responseJson);
-//     })
-//     .catch(error => {
-//       console.error(error);
-//     });
-// };
+  return fetch('http://localhost:3001/members', {
+    method,
+    body
+  })
+    .then(response => response.json())
+    .then(responseJson => {
+      console.log(responseJson);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+};
