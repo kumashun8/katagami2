@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ApiPoster () {
+export default function() {
   const classes = useStyles();
   const [name, setName] = React.useState('');
   const [age, setAge] = React.useState(' ');
@@ -49,14 +49,14 @@ export default function ApiPoster () {
       <div className={classes.container}>
         <TextField
           id='standard-basic name'
-          label='your name'
+          label='Name'
           margin='dense'
           value={name}
           onChange={handleChangeName}
         />
         <TextField
           id='standard-basic'
-          label='your age'
+          label='Age'
           type='normal'
           margin='normal'
           onChange={handleChangeAge}
