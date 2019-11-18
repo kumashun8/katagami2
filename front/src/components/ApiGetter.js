@@ -9,7 +9,7 @@ export default class extends Component {
   }
 
   componentDidMount(){
-    return fetch('http://localhost:3001/members/index')
+    return fetch('http://localhost:3001/members')
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson);

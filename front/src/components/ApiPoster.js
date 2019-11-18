@@ -15,17 +15,20 @@ export default class extends Component {
   constructor() {
     super();
     this.onClickHandler = this.onClickHandler.bind(this);
-    this.setState({
+    this.state = {
       inputText: ''
-    });
+    };
   }
 
   onClickHandler = (e) => {
     e.preventDefault();
     const method = 'POST';
-    const body = new FormData(document.getElementById('form'));
+    const body = new FormData();
 
-    return fetch('url', {
+    body.append('name', 'ezuka tarou');
+    body.append('age', '22');
+
+    return fetch('http://localhost:3001/members', {
       method,
       body
     })
