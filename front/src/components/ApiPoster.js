@@ -1,32 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import { Button, TextField } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-  button: {
-    margin: theme.spacing(1),
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '400px'
   },
-  input: {
-    display: 'none',
+  button: {
+    marginTop: theme.spacing(1),
   },
 }));
 
-export default class extends Component {
-  constructor() {
-    super();
-    this.onClickHandler = this.onClickHandler.bind(this);
-    this.state = {
-      inputText: ''
-    };
+export default function ApiPoster () {
+  const classes = useStyles();
+  const [name, setName] = React.useState('');
+  const [age, setAge] = React.useState(' ');
+  const handleChangeName = e => {
+    setName(e.target.value);
   }
-
-  onClickHandler = (e) => {
+  const handleChangeAge = e => {
+    setAge(e.target.value);
+  }
+  const handlePost = e => {
     e.preventDefault();
     const method = 'POST';
     const body = new FormData();
 
-    body.append('name', 'ezuka tarou');
-    body.append('age', '22');
+    body.append('name', name);
+    body.append('age', age);
 
     return fetch('http://localhost:3001/members', {
       method,
@@ -34,9 +37,6 @@ export default class extends Component {
     })
       .then(response => response.json())
       .then(responseJson => {
-        this.setState({
-          inputText: ''
-        });
         console.log(responseJson);
       })
       .catch(error => {
@@ -44,11 +44,32 @@ export default class extends Component {
       });
   }
 
-  render() {
-    return (
-      <Button variant="outlined" color="primary" onClick={this.onClickHandler}>
-        API-Posting
-      </Button>
-    );
-  }
+  return (
+    <form noValidate autoComplete='off'>
+      <div className={classes.container}>
+        <TextField
+          id='standard-basic name'
+          label='your name'
+          margin='dense'
+          value={name}
+          onChange={handleChangeName}
+        />
+        <TextField
+          id='standard-basic'
+          label='your age'
+          type='normal'
+          margin='normal'
+          onChange={handleChangeAge}
+        />
+        <Button
+          variant='outlined'
+          color='primary'
+          className={classes.button}
+          onClick={handlePost}
+        >
+          API-Posting
+        </Button>
+      </div>
+    </form>
+  );
 }
