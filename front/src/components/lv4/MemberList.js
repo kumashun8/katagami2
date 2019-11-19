@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function(props) {
   const { loading, members } = props;
@@ -11,7 +12,11 @@ export default function(props) {
   return (
     <ul className="App-header">
       {members.map(member => (
-        <li key={member.id}>{member.name}, {member.age}</li>
+        <li>
+          <Link to={`/members/${member.id}`} key={member.id}>
+            {member.name},
+          </Link>
+        </li>
       ))}
     </ul>
   );

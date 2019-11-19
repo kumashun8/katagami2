@@ -5,6 +5,7 @@ import {
   NavLink
 } from 'react-router-dom';
 import Top from 'pages/Top';
+import Member from 'components/lv1/Member';
 
 const App = () => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ const App = () => (
       </ul>
       <hr />
       <Route exact path='/' component={Top} />
+      <Route path='/members/:id' component={Member} />
     </div>
   </BrowserRouter>
 );
