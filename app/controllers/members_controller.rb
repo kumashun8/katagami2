@@ -3,12 +3,12 @@ class MembersController < ApplicationController
 
   def index
     @members = Member.order(created_at: "DESC").select(:id, :name)
-    render :json => @members
+    render json: @members
   end
 
   def show
     @member = Member.find(params[:id])
-    render :json => @member
+    render json: @member
   end
 
   def create
