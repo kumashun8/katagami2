@@ -1,6 +1,6 @@
 const baseUrl = 'http://localhost:3001'
 
-export const signUp = props => {
+export const signup = props => {
   const {
     email,
     password,

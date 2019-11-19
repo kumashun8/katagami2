@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import Top from 'pages/Top';
 import MemberDetail from 'pages/MemberDetail';
+import SignupPage from 'pages/SignupPage';
 
 const App = () => (
   <BrowserRouter>
@@ -24,8 +25,9 @@ const App = () => (
       <Switch>
         <Route path='/public' component={PublicPage} />
         <Route path='/login' component={LoginPage} />
+        <Route path='/signup' component={SignupPage} />
         <Route path='/members/:id' component={MemberDetail} />
-        <PrivateRoute path='/private'>
+        <PrivateRoute path='/'>
           <Top />
         </PrivateRoute>
       </Switch>

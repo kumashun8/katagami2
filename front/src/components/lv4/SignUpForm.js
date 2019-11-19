@@ -10,7 +10,7 @@ export default function (props) {
     handleChangeEmail,
     handleChangePassword,
     handleChangePassWordConfirmation,
-    handleSignUp
+    handleSignup
   } = props;
 
   return (
@@ -26,7 +26,7 @@ export default function (props) {
         <TextField
           id='standard-basic'
           label='パスワード (6文字以上)'
-          type='number'
+          type='password'
           margin='normal'
           value={password}
           onChange={e => handleChangePassword(e.target.value)}
@@ -34,7 +34,7 @@ export default function (props) {
         <TextField
           id='standard-basic'
           label='パスワード (再入力)'
-          type='number'
+          type='password'
           margin='normal'
           value={passwordConfirmation}
           onChange={e => handleChangePassWordConfirmation(e.target.value)}
@@ -43,7 +43,7 @@ export default function (props) {
           variant='contained'
           color='primary'
           className={classes.button}
-          onClick={handleSignUp}
+          onClick={handleSignup}
         >
           新規登録
         </Button>
