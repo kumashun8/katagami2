@@ -28,6 +28,8 @@ export default function () {
       setMembers(members);
       setLoading(false);
     }
+    setName('');
+    setAge('');
     setLoading(true);
     fetchMembers(handleGetMembers);
   }, [latest]);
@@ -40,6 +42,8 @@ export default function () {
       />
       <MemberForm
         classes={classes}
+        name={name}
+        age={age}
         handleChangeName={setName}
         handleChangeAge={setAge}
         handlePost={() =>

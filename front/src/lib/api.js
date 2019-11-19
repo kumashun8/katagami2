@@ -1,7 +1,7 @@
 const baseUrl = 'http://localhost:3001/'
 
 export const fetchMembers = handleGetMembers => {
-  return fetch(baseUrl + '/members')
+  return fetch(baseUrl + 'members')
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson);
@@ -24,7 +24,7 @@ export const postMember = props => {
   body.append('name', name);
   body.append('age', age);
 
-  return fetch('http://localhost:3001/members', {
+  return fetch(baseUrl + 'members', {
     method,
     body
   })

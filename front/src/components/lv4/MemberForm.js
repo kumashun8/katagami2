@@ -4,6 +4,8 @@ import { Button, TextField } from '@material-ui/core';
 export default function(props) {
   const {
     classes,
+    name,
+    age,
     handleChangeName,
     handleChangeAge,
     handlePost
@@ -13,9 +15,10 @@ export default function(props) {
     <form noValidate autoComplete='off'>
       <div className={classes.container}>
         <TextField
-          id='standard-basic name'
+          id='standard-basic'
           label='Name'
           margin='dense'
+          value={name}
           onChange={e => handleChangeName(e.target.value)}
         />
         <TextField
@@ -23,6 +26,7 @@ export default function(props) {
           label='Age'
           type='number'
           margin='normal'
+          value={age}
           onChange={e => handleChangeAge(e.target.value)}
         />
         <Button
