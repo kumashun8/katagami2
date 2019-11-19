@@ -6,6 +6,11 @@ class MembersController < ApplicationController
     render :json => @members
   end
 
+  def show
+    @member = Member.find(params[:id])
+    render :json => @member
+  end
+
   def create
     @member = Member.create(
       name: params[:name],

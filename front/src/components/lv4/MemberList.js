@@ -14,7 +14,7 @@ export default function(props) {
       {members.map(member => (
         <li>
           <Link to={`/members/${member.id}`} key={member.id}>
-            {member.name},
+            {member.name}
           </Link>
         </li>
       ))}
