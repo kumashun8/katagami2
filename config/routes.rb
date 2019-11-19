@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'users/create'
   resources :members
-  resources :users
+  get '/signup', to: 'users#create'
+  get '/login' , to: 'users#login'
+  get '/logout', to: 'users#logout'
 end
