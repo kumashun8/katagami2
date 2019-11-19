@@ -12,6 +12,18 @@ export const fetchMembers = handleGetMembers => {
       });
 };
 
+export const fetchMember = (id, handleGetMember) => {
+  return fetch(baseUrl + 'members/' + id)
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson);
+      handleGetMember(responseJson);
+    })
+    .catch((error) =>{
+      console.error(error);
+    });
+}
+
 export const postMember = props => {
   const {
     name,

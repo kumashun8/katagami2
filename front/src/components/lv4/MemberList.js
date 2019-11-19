@@ -12,8 +12,8 @@ export default function(props) {
   return (
     <ul className="App-header">
       {members.map(member => (
-        <li>
-          <Link to={`/members/${member.id}`} key={member.id}>
+        <li key={member.id}>
+          <Link to={`/members/${member.id}`}>
             {member.name}
           </Link>
         </li>
