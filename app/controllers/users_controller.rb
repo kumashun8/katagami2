@@ -7,13 +7,30 @@ class UsersController < ApplicationController
       password: params[:password],
       password_confirmation: params[:password_confirmation]
     )
-    render json: { auth: user.id }
+    render json: { 
+      auth: user.id,
+      errors: user.errors.full_messages
+    }
   end
 
   def login
     user = User.find_by(email: params[:email])
+    error = ""
+    auth = nil
+
+    if user.present?
+      if !!user.authenticate(params[:password])
+        auth = user.id
+      else
+        error = "パスワードが間違っています."
+      end
+    else
+      error = "登録されていないメールアドレスです."
+    end
+
     render json: { 
-      auth: (user && !!user.authenticate(params[:password])) ? user.id : nil
+      auth: (user && !!user.authenticate(params[:password])) ? user.id : nil,
+      error: error
     }
   end
 

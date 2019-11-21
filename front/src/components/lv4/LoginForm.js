@@ -18,18 +18,25 @@ export default function (props) {
     handleLogin
   } = props;
 
-  const isAbleToLogin = isValidEmail(email) && isValidPassword(password);
+  let emailErrorIsAppeared = false;
+  let passwordErrorIsAppeared = false;
+
+  const handleSecureLogin = () => {
+    emailErrorIsAppeared = !isValidEmail(email);
+    passwordErrorIsAppeared = !isValidPassword(password);
+    handleLogin();
+  }
 
   return (
     <form autoComplete='off'>
       <div className={classes.container}>
         <TextField
-          error={false}
           id='standard-basic email'
           label='メールアドレス'
-          helperText='必須項目です'
           margin='dense'
           value={email}
+          error={emailErrorIsAppeared}
+          helperText={emailErrorIsAppeared ? 'メールアドレスに誤りがあります.' : ''}
           onChange={e => handleChangeEmail(e.target.value)}
         />
         <TextField
@@ -38,14 +45,15 @@ export default function (props) {
           type='password'
           margin='normal'
           value={password}
+          error={passwordErrorIsAppeared}
           onChange={e => handleChangePassword(e.target.value)}
         />
         <Button
           variant='contained'
           color='primary'
-          disabled={!isAbleToLogin}
+          disabled={!(email && password)}
           className={classes.button}
-          onClick={handleLogin}
+          onClick={handleSecureLogin}
         >
           ログイン
         </Button>
