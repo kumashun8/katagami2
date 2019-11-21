@@ -11,6 +11,7 @@ import {
 import Top from 'pages/Top';
 import MemberDetail from 'pages/MemberDetail';
 import SignupPage from 'pages/SignupPage';
+import LoginPage from 'pages/LoginPage';
 import { isLoggedIn, logout } from 'lib/auth';
 
 export default function () {
@@ -64,6 +65,12 @@ export default function () {
         <Switch>
           <Route path='/signup' render={() =>
             <SignupPage
+              auth={loggedIn}
+              setAuth={setLoggedIn}
+            />}
+          />
+          <Route path='/login' render={() =>
+            <LoginPage
               auth={loggedIn}
               setAuth={setLoggedIn}
             />}

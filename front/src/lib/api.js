@@ -25,7 +25,8 @@ export const signup = async(props) => {
 export const login = async(props) => {
   const {
     email,
-    password
+    password,
+    handleAuth
   } = props;
 
   const body = new FormData();
@@ -35,7 +36,7 @@ export const login = async(props) => {
   await fetchPost({
     url: `${baseUrl}/login`,
     body: body,
-    successAction: authenticate
+    successAction: handleAuth
   });
 }
 

@@ -3,7 +3,6 @@ export const authenticate = auth => {
   if (auth) {
     localStorage.setItem('currentUser', auth);
   }
-  console.log(localStorage.getItem('currentUser'));
 }
 
 export const isLoggedIn = () => (

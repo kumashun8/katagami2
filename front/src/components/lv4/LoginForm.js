@@ -24,7 +24,7 @@ export default function (props) {
         <TextField
           id='standard-basic'
           label='パスワード'
-          type='number'
+          type='password'
           margin='normal'
           value={password}
           onChange={e => handleChangePassword(e.target.value)}
