@@ -1,27 +1,20 @@
 class UsersController < ApplicationController
+  protect_from_forgery
+  
   def signup
-    @user = User.new(
-      email: params[:email]
-      password: params[:password]
+    user = User.create(
+      email: params[:email],
+      password: params[:password],
       password_confirmation: params[:password_confirmation]
     )
-    if @user.save
-      session[:user_id] = @user.id
-    end
-    render json: session
+    render json: { auth: user.id }
   end
 
   def login
-    @user = User.find_by(email: params[:email])
-    if @user && @user.authenticate(user_params.password)
-      session[:user_id] = @user.id
-    end
-    render json: session
-  end
-
-  def logout
-    session.delete(:user_id)
-    render json: session
+    user = User.find_by(email: params[:email])
+    render json: { 
+      auth: (user && !!user.authenticate(params[:password])) ? user.id : nil
+    }
   end
 
   private

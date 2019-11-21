@@ -1,11 +1,13 @@
+import { authenticate } from "lib/auth";
+
 const baseUrl = 'http://localhost:3001'
 
-export const signup = props => {
+export const signup = async(props) => {
   const {
     email,
     password,
     passwordConfirmation,
-    setLoggedIn
+    handleAuth
   } = props;
 
   const body = new FormData();
@@ -13,38 +15,27 @@ export const signup = props => {
   body.append('password', password);
   body.append('password_confirmation', passwordConfirmation);
 
-  fetchPost({
+  await fetchPost({
     url: `${baseUrl}/signup`,
     body: body,
-    successAction: setLoggedIn
+    successAction: handleAuth
   });
 }
 
-export const login = props => {
+export const login = async(props) => {
   const {
     email,
-    password,
-    setLoggedIn
+    password
   } = props;
 
   const body = new FormData();
   body.append('email', email);
   body.append('password', password);
 
-  fetchPost({
+  await fetchPost({
     url: `${baseUrl}/login`,
     body: body,
-    successAction: setLoggedIn
-  });
-}
-
-export const logout = setLoggedIn => {
-  const body = new FormData();
-
-  fetchPost({
-    url: `${baseUrl}/logout`,
-    body: body,
-    successAction: setLoggedIn
+    successAction: authenticate
   });
 }
 
@@ -80,15 +71,14 @@ export const postMember = props => {
   });
 }
 
-const fetchGet = props => {
+const fetchGet = async (props) => {
   const {
     url,
     successAction,
     failureAction
   } = props;
-  console.log(props);
 
-  return fetch(url)
+  return await fetch(url)
     .then(response => response.json())
     .then(responseJson => {
       console.log(responseJson);
@@ -104,7 +94,7 @@ const fetchGet = props => {
     });
 }
 
-const fetchPost = props => {
+const fetchPost = async(props) => {
   const {
     url,
     body,
@@ -114,7 +104,7 @@ const fetchPost = props => {
 
   const method = 'POST';
 
-  return fetch(url, {
+  return await fetch(url, {
     method,
     body
   })
