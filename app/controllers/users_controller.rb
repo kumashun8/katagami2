@@ -7,9 +7,12 @@ class UsersController < ApplicationController
       password: params[:password],
       password_confirmation: params[:password_confirmation]
     )
+
+    errors = Set.new(user.errors.full_messages)
+
     render json: { 
       auth: user.id,
-      errors: user.errors.full_messages
+      errors: errors.to_a
     }
   end
 
