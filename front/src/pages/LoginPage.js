@@ -26,17 +26,22 @@ export default function ({ auth, setAuth }) {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({});
   
   let location = useLocation();
   let history = useHistory();
 
   let { from } = location.state || { from: { pathname: '/' } };
 
-  const handleAuth = ({ auth }) => {
-    console.log(auth);
+  const handleAuth = response => {
+    const { auth, errors } = response;
+    console.log(response);
     authenticate(auth);
     setAuth(auth);
-    setTimeout(history.replace(from), 100);
+    setErrors(errors);
+    if (auth) {
+      setTimeout(history.replace(from), 100);
+    }
   }
 
   return (
@@ -48,6 +53,8 @@ export default function ({ auth, setAuth }) {
           classes={classes}
           email={email}
           password={password}
+          errors={errors}
+          handleClearErrors={() => setErrors({})}
           handleChangeEmail={setEmail}
           handleChangePassword={setPassword}
           handleLogin={() =>

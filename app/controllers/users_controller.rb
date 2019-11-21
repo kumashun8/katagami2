@@ -15,22 +15,22 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(email: params[:email])
-    error = ""
+    errors = {}
     auth = nil
 
     if user.present?
       if !!user.authenticate(params[:password])
         auth = user.id
       else
-        error = "パスワードが間違っています."
+        errors[:password] = "パスワードが間違っています."
       end
     else
-      error = "登録されていないメールアドレスです."
+      errors[:email] = "登録されていないメールアドレスです."
     end
 
     render json: { 
-      auth: (user && !!user.authenticate(params[:password])) ? user.id : nil,
-      error: error
+      auth: auth,
+      errors: errors
     }
   end
 

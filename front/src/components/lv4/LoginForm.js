@@ -3,29 +3,18 @@ import {
   Button,
   TextField
 } from '@material-ui/core';
-import {
-  isValidEmail,
-  isValidPassword
-} from 'lib/validation';
 
 export default function (props) {
   const {
     classes,
     email,
     password,
+    errors,
+    handleClearErrors,
     handleChangeEmail,
     handleChangePassword,
     handleLogin
   } = props;
-
-  let emailErrorIsAppeared = false;
-  let passwordErrorIsAppeared = false;
-
-  const handleSecureLogin = () => {
-    emailErrorIsAppeared = !isValidEmail(email);
-    passwordErrorIsAppeared = !isValidPassword(password);
-    handleLogin();
-  }
 
   return (
     <form autoComplete='off'>
@@ -35,8 +24,9 @@ export default function (props) {
           label='メールアドレス'
           margin='dense'
           value={email}
-          error={emailErrorIsAppeared}
-          helperText={emailErrorIsAppeared ? 'メールアドレスに誤りがあります.' : ''}
+          error={errors.email !== undefined}
+          helperText={errors.email}
+          onFocus={handleClearErrors}
           onChange={e => handleChangeEmail(e.target.value)}
         />
         <TextField
@@ -45,7 +35,9 @@ export default function (props) {
           type='password'
           margin='normal'
           value={password}
-          error={passwordErrorIsAppeared}
+          error={errors.password !== undefined}
+          helperText={errors.password}
+          onFocus={handleClearErrors}
           onChange={e => handleChangePassword(e.target.value)}
         />
         <Button
@@ -53,7 +45,7 @@ export default function (props) {
           color='primary'
           disabled={!(email && password)}
           className={classes.button}
-          onClick={handleSecureLogin}
+          onClick={handleLogin}
         >
           ログイン
         </Button>
