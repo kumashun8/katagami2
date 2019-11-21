@@ -15,8 +15,10 @@ export default function (props) {
     <form autoComplete='off'>
       <div className={classes.container}>
         <TextField
+          error={false}
           id='standard-basic email'
           label='メールアドレス'
+          helperText='必須項目です'
           margin='dense'
           value={email}
           onChange={e => handleChangeEmail(e.target.value)}
