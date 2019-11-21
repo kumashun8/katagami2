@@ -30,4 +30,4 @@ export default function (props) {
       <p>Since : {member.created_at}</p>
     </div>
   );
-};
+}
