@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   BrowserRouter,
   Switch,
   Route,
   NavLink,
-  Redirect,
-  useHistory,
-  useLocation
+  Redirect
 } from 'react-router-dom';
 import Top from 'pages/Top';
 import MemberDetail from 'pages/MemberDetail';
@@ -33,7 +31,7 @@ export default function () {
           ) : (
             <Redirect
               to={{
-                pathname: "/signup",
+                pathname: '/login',
                 state: { from: location }
               }}
             />

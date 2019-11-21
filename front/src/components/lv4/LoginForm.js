@@ -15,14 +15,14 @@ export default function (props) {
     <form autoComplete='off'>
       <div className={classes.container}>
         <TextField
-          id='standard-basic'
+          id='standard-basic email'
           label='メールアドレス'
           margin='dense'
           value={email}
           onChange={e => handleChangeEmail(e.target.value)}
         />
         <TextField
-          id='standard-basic'
+          id='standard-basic password'
           label='パスワード'
           type='password'
           margin='normal'

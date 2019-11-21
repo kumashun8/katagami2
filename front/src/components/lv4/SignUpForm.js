@@ -17,14 +17,14 @@ export default function (props) {
     <form autoComplete='off'>
       <div className={classes.container}>
         <TextField
-          id='standard-basic'
+          id='standard-basic email'
           label='メールアドレス'
           margin='dense'
           value={email}
           onChange={e => handleChangeEmail(e.target.value)}
         />
         <TextField
-          id='standard-basic'
+          id='standard-basic password'
           label='パスワード (6文字以上)'
           type='password'
           margin='normal'
@@ -32,7 +32,7 @@ export default function (props) {
           onChange={e => handleChangePassword(e.target.value)}
         />
         <TextField
-          id='standard-basic'
+          id='standard-basic password-conf'
           label='パスワード (再入力)'
           type='password'
           margin='normal'

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Link,
   Redirect,
   useLocation,
   useHistory
@@ -42,20 +43,23 @@ export default function ({ auth, setAuth }) {
     auth ? (
       <Redirect to='/' />
     ) : (
-      <LoginForm
-        classes={classes}
-        email={email}
-        password={password}
-        handleChangeEmail={setEmail}
-        handleChangePassword={setPassword}
-        handleLogin={() =>
-          login({
-            email,
-            password,
-            handleAuth
-          })
-        }
-      />
+      <div>
+        <LoginForm
+          classes={classes}
+          email={email}
+          password={password}
+          handleChangeEmail={setEmail}
+          handleChangePassword={setPassword}
+          handleLogin={() =>
+            login({
+              email,
+              password,
+              handleAuth
+            })
+          }
+        />
+        <Link to='/signup'>新規登録はこちら</Link>
+      </div>
     )
   );
 }

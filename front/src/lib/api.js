@@ -1,5 +1,3 @@
-import { authenticate } from "lib/auth";
-
 const baseUrl = 'http://localhost:3001'
 
 export const signup = async(props) => {

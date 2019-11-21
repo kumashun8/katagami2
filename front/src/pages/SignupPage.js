@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Link,
   Redirect,
   useLocation,
   useHistory
@@ -7,7 +8,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import SignupForm from 'components/lv4/SignupForm';
 import { signup } from 'lib/api';
-import { authenticate, isLoggedIn } from 'lib/auth';
+import { authenticate } from 'lib/auth';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -42,23 +43,26 @@ export default function ({ auth, setAuth }) {
     auth ? (
       <Redirect to='/' />
     ) : (
-      <SignupForm
-        classes={classes}
-        email={email}
-        password={password}
-        passwordConfirmation={passwordConfirmation}
-        handleChangeEmail={setEmail}
-        handleChangePassword={setPassword}
-        handleChangePassWordConfirmation={setPasswordConfirmation}
-        handleSignup={() =>
-          signup({
-            email,
-            password,
-            passwordConfirmation,
-            handleAuth
-          })
-        }
-      />
+      <div>
+        <SignupForm
+          classes={classes}
+          email={email}
+          password={password}
+          passwordConfirmation={passwordConfirmation}
+          handleChangeEmail={setEmail}
+          handleChangePassword={setPassword}
+          handleChangePassWordConfirmation={setPasswordConfirmation}
+          handleSignup={() =>
+            signup({
+              email,
+              password,
+              passwordConfirmation,
+              handleAuth
+            })
+          }
+          />
+        <Link to='/login'>ログインはこちら</Link>
+      </div>
     )
   );
 }
