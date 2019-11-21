@@ -1,5 +1,12 @@
 import React from 'react';
-import { Button, TextField } from '@material-ui/core';
+import {
+  Button,
+  TextField
+} from '@material-ui/core';
+import {
+  isValidEmail,
+  isValidPassword
+} from 'lib/validation';
 
 export default function (props) {
   const {
@@ -10,6 +17,8 @@ export default function (props) {
     handleChangePassword,
     handleLogin
   } = props;
+
+  const isAbleToLogin = isValidEmail(email) && isValidPassword(password);
 
   return (
     <form autoComplete='off'>
@@ -34,6 +43,7 @@ export default function (props) {
         <Button
           variant='contained'
           color='primary'
+          disabled={!isAbleToLogin}
           className={classes.button}
           onClick={handleLogin}
         >

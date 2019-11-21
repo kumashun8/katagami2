@@ -4,11 +4,11 @@ export const isValidEmail = email => {
 }
 
 export const isValidPassword = password => {
-  const regexp = /^[a-zA-Z0-9!-/:-@¥[-`{-~]{6,}$/;
-  return regexp.text(password);
+  const regexp = /^[A-Za-z0-9]{6,}$/;
+  return regexp.test(password);
 }
 
-export const isValidAndMacthedPassword = (password, passwordConf) => {
+export const isMacthedPassword = (password, passwordConf) => {
   if (!isValidPassword(password) || !isValidPassword(passwordConf)) {
     return false;
   }
