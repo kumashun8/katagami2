@@ -33,11 +33,13 @@ export default function ({ auth, setAuth }) {
 
   let { from } = location.state || { from: { pathname: '/' } };
 
-  const handleAuth = response => {
-    const { auth, errors } = response;
-    setErrors(errors);
-    authenticate(auth);
-    setAuth(auth);
+  const handleAuth = ({ auth, errors }) => {
+    if (auth) {
+      authenticate(auth);
+      setAuth(auth);
+    } else {
+      setErrors(errors);
+    }
   }
 
   useEffect(() => {
