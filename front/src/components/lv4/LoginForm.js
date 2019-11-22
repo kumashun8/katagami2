@@ -10,9 +10,9 @@ export default function (props) {
     email,
     password,
     errors,
-    handleClearErrors,
     handleChangeEmail,
     handleChangePassword,
+    handleClearErrors,
     handleLogin
   } = props;
 

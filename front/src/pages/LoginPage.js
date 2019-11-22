@@ -54,9 +54,9 @@ export default function ({ auth, setAuth }) {
           email={email}
           password={password}
           errors={errors}
-          handleClearErrors={() => setErrors({})}
           handleChangeEmail={setEmail}
           handleChangePassword={setPassword}
+          handleClearErrors={() => setErrors({})}
           handleLogin={() =>
             login({
               email,

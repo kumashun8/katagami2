@@ -27,42 +27,50 @@ export default function ({ auth, setAuth }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [errors, setErrors] = useState({});
   
   let location = useLocation();
   let history = useHistory();
 
   let { from } = location.state || { from: { pathname: '/' } };
 
-  const handleAuth = ({ auth }) => {
+  const handleAuth = response => {
+    const { auth, errors } = response;
+    console.log(response);
     authenticate(auth);
     setAuth(auth);
-    setTimeout(history.replace(from), 100);
+    setErrors(errors);
+    if (auth) {
+      setTimeout(history.replace(from), 100);
+    }
   }
 
   return (
     auth ? (
       <Redirect to='/' />
     ) : (
-      <div>
-        <SignupForm
-          classes={classes}
-          email={email}
-          password={password}
-          passwordConfirmation={passwordConfirmation}
-          handleChangeEmail={setEmail}
-          handleChangePassword={setPassword}
-          handleChangePassWordConfirmation={setPasswordConfirmation}
-          handleSignup={() =>
-            signup({
-              email,
-              password,
-              passwordConfirmation,
-              handleAuth
-            })
-          }
+        <div>
+          <SignupForm
+            classes={classes}
+            email={email}
+            password={password}
+            passwordConfirmation={passwordConfirmation}
+            errors={errors}
+            handleChangeEmail={setEmail}
+            handleChangePassword={setPassword}
+            handleChangePassWordConfirmation={setPasswordConfirmation}
+            handleClearErrors={() => setErrors({})}
+            handleSignup={() =>
+              signup({
+                email,
+                password,
+                passwordConfirmation,
+                handleAuth
+              })
+            }
           />
-        <Link to='/login'>ログインはこちら</Link>
-      </div>
-    )
+          <Link to='/login'>ログインはこちら</Link>
+        </div>
+      )
   );
 }
