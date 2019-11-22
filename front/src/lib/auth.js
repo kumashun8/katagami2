@@ -1,5 +1,4 @@
 export const authenticate = auth => {
-  console.log(auth);
   if (auth) {
     localStorage.setItem('currentUser', auth);
   }

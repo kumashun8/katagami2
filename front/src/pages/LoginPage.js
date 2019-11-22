@@ -43,7 +43,6 @@ export default function ({ auth, setAuth }) {
   useEffect(() => {
     if (auth) {
       setTimeout(history.replace(from), 1000);
-      console.log('rendered');
     }
   });
 
