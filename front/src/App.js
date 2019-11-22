@@ -21,7 +21,6 @@ export default function () {
   }
 
   const PrivateRoute = ({ children, ...rest }) => {
-    console.log(loggedIn);
     return (
       <Route
         {...rest}

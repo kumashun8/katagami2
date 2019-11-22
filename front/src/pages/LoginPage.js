@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Link,
   Redirect,
@@ -35,14 +35,17 @@ export default function ({ auth, setAuth }) {
 
   const handleAuth = response => {
     const { auth, errors } = response;
-    console.log(response);
+    setErrors(errors);
     authenticate(auth);
     setAuth(auth);
-    setErrors(errors);
-    if (auth) {
-      setTimeout(history.replace(from), 100);
-    }
   }
+
+  useEffect(() => {
+    if (auth) {
+      setTimeout(history.replace(from), 1000);
+      console.log('rendered');
+    }
+  });
 
   return (
     auth ? (
