@@ -20,23 +20,22 @@ export default function () {
     setLoggedIn(null);
   }
 
-  const PrivateRoute = ({ children, ...rest }) => {
+  const PrivateRoute = ({ path, component }) => {
     return (
-      <Route
-        {...rest}
-        render={({ location }) =>
-        loggedIn ? (
-            children
-          ) : (
+      loggedIn ? (
+        <Route path={path} component={component} />
+      ) : (
+        <Route
+          render={({ location }) => (
             <Redirect
               to={{
                 pathname: '/login',
                 state: { from: location }
               }}
             />
-          )
-        }
-      />
+          )}
+        />
+      )
     );
   }
 
@@ -72,10 +71,8 @@ export default function () {
               setAuth={setLoggedIn}
             />}
           />
-          <Route path='/members/:id' component={MemberDetail} />
-          <PrivateRoute path='/'>
-            <Top />
-          </PrivateRoute>
+          <PrivateRoute path='/members/:id' component={MemberDetail} />
+          <PrivateRoute path='/' component={Top} />
         </Switch>
       </div>
     </BrowserRouter>
