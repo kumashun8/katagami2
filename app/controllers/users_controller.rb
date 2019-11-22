@@ -8,11 +8,9 @@ class UsersController < ApplicationController
       password_confirmation: params[:password_confirmation]
     )
 
-    errors = Set.new(user.errors.full_messages)
-
     render json: { 
       auth: user.id,
-      errors: errors.to_a
+      errors: format_error_messages(user)
     }
   end
 
@@ -25,10 +23,10 @@ class UsersController < ApplicationController
       if !!user.authenticate(params[:password])
         auth = user.id
       else
-        errors[:password] = "パスワードが間違っています."
+        errors[:password] = "パスワードが間違っています"
       end
     else
-      errors[:email] = "登録されていないメールアドレスです."
+      errors[:email] = "登録されていないメールアドレスです"
     end
 
     render json: { 
@@ -38,6 +36,25 @@ class UsersController < ApplicationController
   end
 
   private
+    def format_error_messages(user)
+      _errors = user.errors.full_messages
+      errors = {}
+
+      _errors.each do |error|
+        case error
+        when "メールアドレスは不正な値です" then
+          errors[:email] = "メールアドレスが正しくありません"
+        when "メールアドレスはすでに存在します" then
+          errors[:email] = "このメールアドレスは既に登録されています"
+        when "パスワードは6文字以上で入力してください" then
+          errors[:password] = "パスワードは6文字以上で入力してください"
+        when "パスワード(確認)とパスワードの入力が一致しません" then
+          errors[:password_confirmation] = "再入力されたパスワードが一致しません"
+        end
+      end
+      errors
+    end
+
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation)
     end
