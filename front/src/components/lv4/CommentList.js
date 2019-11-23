@@ -10,8 +10,9 @@ export default function (props) {
       <ul>
         {comments.map(comment => (
           <Comment
+            key={comment.id}
             detail={comment.detail}
-            create_at={comment.create_at}
+            created_at={comment.created_at}
           />
         ))}
       </ul>

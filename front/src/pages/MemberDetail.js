@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { fetchMember } from 'lib/api';
+import { fetchMember, fetchCommentsOfMember } from 'lib/api';
+import CommentList from 'components/lv4/CommentList';
 
 export default function (props) {
   const { id } = props.match.params;
@@ -9,13 +10,23 @@ export default function (props) {
   const [latest,  setLatest ] = useState(true);
 
   useEffect(() => {
-    console.log('useEffect is called.');
+    console.log('useEffect1 is called.');
     const handleGetMember = member => {
       setMember(member);
       setLoading(false);
     }
     setLoading(true);
     fetchMember(id, handleGetMember);
+  }, [latest]);
+
+  useEffect(() => {
+    console.log('useEffect2 is called.');
+    const handleGetComments = comments => {
+      setComments(comments);
+      setLoading(false);
+    }
+    setLoading(true);
+    fetchCommentsOfMember(id, handleGetComments);
   }, [latest]);
 
   if (loading) {
@@ -26,10 +37,10 @@ export default function (props) {
   
   return (
     <div>
-      <p>ID : {member.id}</p>
-      <p>Name : {member.name}</p>
+      <h1>{member.id}. {member.name}</h1>
       <p>Age : {member.age}</p>
-      <p>Since : {member.created_at}</p>
+      <hr />
+      <CommentList comments={comments} />
     </div>
   );
 }
