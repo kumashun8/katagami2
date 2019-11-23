@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   post '/login' , to: 'users#login'
   # Comment
   post '/comments', to: 'comments#create'
-  post '/comments/update', to: 'comments#update'
-  delete '/destroy', to: 'comments#destroy'
+  post '/comments/update/:id', to: 'comments#update'
+  delete '/comments/destroy/:id', to: 'comments#destroy'
   get '/comments/members/:id', to: 'comments#index_by_member'
   get '/comments/users/:id', to: 'comments#index_by_user'
 end
