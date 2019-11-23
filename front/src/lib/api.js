@@ -1,6 +1,6 @@
 const baseUrl = 'http://localhost:3001'
 
-export const signup = async(props) => {
+export const signup = async (props) => {
   const {
     email,
     password,
@@ -20,7 +20,7 @@ export const signup = async(props) => {
   });
 }
 
-export const login = async(props) => {
+export const login = async (props) => {
   const {
     email,
     password,
@@ -38,21 +38,21 @@ export const login = async(props) => {
   });
 }
 
-export const fetchMembers = handleGetMembers => {
-  fetchGet({
+export const fetchMembers = async (handleGetMembers) => {
+  await fetchGet({
     url: `${baseUrl}/members`,
     successAction: handleGetMembers
   });
 }
 
-export const fetchMember = (id, handleGetMember) => {
-  fetchGet({
+export const fetchMember = async (id, handleGetMember) => {
+  await fetchGet({
     url: `${baseUrl}/members/${id}`,
     successAction: handleGetMember
   });
 }
 
-export const postMember = props => {
+export const postMember = async (props) => {
   const {
     name,
     age,
@@ -63,10 +63,76 @@ export const postMember = props => {
   body.append('name', name);
   body.append('age', age);
 
-  fetchPost({
+  await fetchPost({
     url: `${baseUrl}/members`,
     body: body,
     successAction: setLatest
+  });
+}
+
+export const postComment = async (props) => {
+  const {
+    detail,
+    user,
+    member,
+    setLatest
+  } = props;
+
+  const body = new FormData();
+  body.append('detail', detail);
+  body.append('user', user);
+  body.append('member', member);
+
+  await fetchPost({
+    url: `${baseUrl}/comments`,
+    body: body,
+    successAction: setLatest
+  });
+}
+
+export const updateComment = async (props) => {
+  const {
+    id,
+    detail,
+    setLatest
+  } = props;
+
+  const body = new FormData();
+  body.append('detail', detail);
+
+  await fetchPost({
+    url: `${baseUrl}/comments/update/${id}`,
+    body: body,
+    successAction: setLatest
+  });
+}
+
+export const deleteComment = async (props) => {
+  const {
+    id,
+    setLatest
+  } = props;
+
+  const body = new FormData();
+
+  await fetchPost({
+    url: `${baseUrl}/comments/destroy/${id}`,
+    body: body,
+    successAction: setLatest
+  });
+}
+
+export const fetchCommentsOfMember = async (id, handleGetComments) => {
+  await fetchGet({
+    url: `${baseUrl}/comments/members/${id}`,
+    successAction: handleGetComments
+  });
+}
+
+export const fetchCommentsOfUser = async (id, handleGetComments) => {
+  await fetchGet({
+    url: `${baseUrl}/comments/users/${id}`,
+    successAction: handleGetComments
   });
 }
 
