@@ -23,11 +23,11 @@ const useStyles = makeStyles(theme => ({
 export default function (props) {
   const classes = useStyles();
   const { id } = props.match.params;
-  const [member, setMember] = useState({});
+  const [member,     setMember] = useState({});
   const [comments, setComments] = useState([]);
-  const [comment, setComment] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [latest,  setLatest ] = useState(true);
+  const [comment,   setComment] = useState('');
+  const [loading,   setLoading] = useState(false);
+  const [latest,     setLatest] = useState(true);
 
   useEffect(() => {
     const handleGetMember = member => {
