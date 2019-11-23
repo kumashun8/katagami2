@@ -70,7 +70,10 @@ export default function (props) {
       <h1>{member.id}. {member.name}</h1>
       <p>Age : {member.age}</p>
       <hr />
-      <CommentList comments={comments} />
+      <CommentList
+        comments={comments}
+        setLatest={setLatest}
+      />
       <CommentForm
         classes={classes}
         detail={comment}

@@ -94,16 +94,15 @@ export const updateComment = async (props) => {
   const {
     id,
     detail,
-    setLatest
+    handleUpdate
   } = props;
-
   const body = new FormData();
   body.append('detail', detail);
 
   await fetchPost({
     url: `${baseUrl}/comments/update/${id}`,
     body: body,
-    successAction: setLatest
+    successAction: handleUpdate
   });
 }
 

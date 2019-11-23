@@ -3,7 +3,10 @@ import Comment from 'components/lv3/Comment';
 import { Grid, Container } from '@material-ui/core';
 
 export default function (props) {
-  const { comments } = props;
+  const {
+    comments,
+    setLatest
+  } = props;
   
   return (
     <div>
@@ -12,9 +15,11 @@ export default function (props) {
         {comments.map(comment => (
           <Comment
             key={comment.id}
-            detail={comment.detail}
+            id={comment.id}
+            baseDetail={comment.detail}
             created_at={comment.created_at}
             userId={comment.user_id}
+            setLatest={setLatest}
           />
         ))}
       </Grid>

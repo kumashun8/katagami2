@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { currentUser } from 'lib/auth';
 import { indigo } from '@material-ui/core/colors';
 import { Edit, Delete, Cancel } from '@material-ui/icons';
+import { updateComment, deleteComment } from 'lib/api';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -29,17 +30,29 @@ const useStyles = makeStyles(theme => ({
 export default function (props) {
   const {
     id,
-    detail,
+    baseDetail,
     created_at,
-    userId
+    userId,
+    setLatest
   } = props;
 
+  const [detail, setDetail] = useState(baseDetail);
   const [isEditteble, setIsEdittable] = useState(false);
   const isOwnComment = userId.toString() === currentUser();
   const classes = useStyles();
 
+  const handleUpdate = response => {
+    setLatest(false);
+  }
+
   const toggleEdittable = () => {
     setIsEdittable(!isEditteble);
+  }
+
+  const resetEdition = () => {
+    toggleEdittable();
+    console.log(baseDetail);
+    setDetail(baseDetail);
   }
 
   return (
@@ -48,8 +61,9 @@ export default function (props) {
         <TextField
           multiline
           className={classes.input}
-          defaultValue={detail}
+          value={detail}
           disabled={!(isOwnComment && isEditteble)}
+          onChange={e => setDetail(e.target.value)}
         />
       </Box>
       {
@@ -58,10 +72,18 @@ export default function (props) {
             <Box>
               <Button
                 className={classes.button}
-                onClick={toggleEdittable}>
+                onClick={resetEdition}>
                 <Cancel />
               </Button>
-              <Button>保存</Button>
+              <Button onClick={() =>
+                updateComment({
+                  id,
+                  detail,
+                  handleUpdate
+                })
+              }>
+                保存
+              </Button>
             </Box>
           ) : (
             <Box>
