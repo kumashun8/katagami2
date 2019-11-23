@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { currentUser } from 'lib/auth';
+import { Container } from '@material-ui/core';
+import { indigo } from '@material-ui/core/colors';
 import {
   fetchMember,
   fetchCommentsOfMember,
@@ -7,9 +10,6 @@ import {
 } from 'lib/api';
 import CommentList from 'components/lv4/CommentList';
 import CommentForm from 'components/lv4/CommentForm';
-import { currentUser } from 'lib/auth';
-import { Container } from '@material-ui/core';
-import { teal, grey, indigo } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
   wrapper: {
