@@ -4,12 +4,12 @@ export const authenticate = auth => {
   }
 }
 
-export const isLoggedIn = () => (
+export const currentUser = () => (
   localStorage.getItem('currentUser')
 );
 
 export const logout = () => {
-  if (isLoggedIn) {
+  if (currentUser) {
     localStorage.removeItem('currentUser');
   }
 }

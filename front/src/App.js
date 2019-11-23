@@ -10,10 +10,10 @@ import Top from 'pages/Top';
 import MemberDetail from 'pages/MemberDetail';
 import SignupPage from 'pages/SignupPage';
 import LoginPage from 'pages/LoginPage';
-import { isLoggedIn, logout } from 'lib/auth';
+import { currentUser, logout } from 'lib/auth';
 
 export default function () {
-  const [loggedIn, setLoggedIn] = useState(isLoggedIn());
+  const [loggedIn, setLoggedIn] = useState(currentUser());
 
   const handleLogout = () => {
     logout();

@@ -7,9 +7,17 @@ import {
 } from 'lib/api';
 import CommentList from 'components/lv4/CommentList';
 import CommentForm from 'components/lv4/CommentForm';
-import { isLoggedIn } from 'lib/auth';
+import { currentUser } from 'lib/auth';
+import { Container } from '@material-ui/core';
+import { teal, grey, indigo } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
+  wrapper: {
+    backgroundColor: indigo[50],
+    color: indigo[900],
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(4)
+  },
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -58,7 +66,7 @@ export default function (props) {
   };
   
   return (
-    <div>
+    <Container className={classes.wrapper}>
       <h1>{member.id}. {member.name}</h1>
       <p>Age : {member.age}</p>
       <hr />
@@ -70,12 +78,12 @@ export default function (props) {
         handlePost={() =>
           postComment({
             detail: comment,
-            user: isLoggedIn(),
+            user: currentUser(),
             member: id,
             setLatest: setLatest
           })
         }
       />
-    </div>
+    </Container>
   );
 }

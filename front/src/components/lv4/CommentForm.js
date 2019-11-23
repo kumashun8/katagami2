@@ -22,7 +22,7 @@ export default function(props) {
         <Button
           variant='contained'
           color='primary'
-          disabled={detail.length == 0}
+          disabled={detail.length === 0}
           className={classes.button}
           onClick={handlePost}
         >

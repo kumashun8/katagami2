@@ -1,5 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  TextField,
+  Grid
+} from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+import { currentUser } from 'lib/auth';
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '640px'
+  },
+  input: {
+    width: '400px'
+  },
+  button: {
+    marginTop: theme.spacing(1),
+  },
+}));
 
 export default function (props) {
   const {
@@ -9,12 +30,31 @@ export default function (props) {
     userId
   } = props;
 
+  const isOwnComment = userId.toString() === currentUser();
+  const classes = useStyles();
+
   return (
-    <li>
+    <Grid className={classes.container}>
       <Box>
-        <p>{detail}</p>
-        <p>{created_at}</p>
+        <TextField
+          multiline
+          className={classes.input}
+          value={detail}
+          disabled={!isOwnComment}
+        />
       </Box>
-    </li>
+      {
+        isOwnComment ? (
+          <Box>
+            <Button>
+              編集
+            </Button>
+            <Button>
+              削除
+            </Button>
+          </Box>
+        ) : <></>
+      }
+    </Grid>
   );
 }
