@@ -1,16 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { fetchMember, fetchCommentsOfMember } from 'lib/api';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  fetchMember,
+  fetchCommentsOfMember,
+  postComment
+} from 'lib/api';
 import CommentList from 'components/lv4/CommentList';
+import CommentForm from 'components/lv4/CommentForm';
+import { isLoggedIn } from 'lib/auth';
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '400px'
+  },
+  button: {
+    marginTop: theme.spacing(1),
+  },
+}));
 
 export default function (props) {
+  const classes = useStyles();
   const { id } = props.match.params;
   const [member, setMember] = useState({});
   const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(false);
   const [latest,  setLatest ] = useState(true);
 
   useEffect(() => {
-    console.log('useEffect1 is called.');
     const handleGetMember = member => {
       setMember(member);
       setLoading(false);
@@ -20,13 +39,16 @@ export default function (props) {
   }, [latest]);
 
   useEffect(() => {
-    console.log('useEffect2 is called.');
     const handleGetComments = comments => {
       setComments(comments);
       setLoading(false);
     }
     setLoading(true);
     fetchCommentsOfMember(id, handleGetComments);
+  }, [latest]);
+
+  useEffect(() => {
+    setComment('');
   }, [latest]);
 
   if (loading) {
@@ -41,6 +63,19 @@ export default function (props) {
       <p>Age : {member.age}</p>
       <hr />
       <CommentList comments={comments} />
+      <CommentForm
+        classes={classes}
+        detail={comment}
+        handleChangeDetail={setComment}
+        handlePost={() =>
+          postComment({
+            detail: comment,
+            user: isLoggedIn(),
+            member: id,
+            setLatest: setLatest
+          })
+        }
+      />
     </div>
   );
 }
