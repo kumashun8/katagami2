@@ -3,11 +3,13 @@ import { fetchMember } from 'lib/api';
 
 export default function (props) {
   const { id } = props.match.params;
-  const [member,  setMember ] = useState({});
+  const [member, setMember] = useState({});
+  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [latest,  setLatest ] = useState(true);
 
   useEffect(() => {
+    console.log('useEffect is called.');
     const handleGetMember = member => {
       setMember(member);
       setLoading(false);
