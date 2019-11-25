@@ -1,7 +1,6 @@
 import React from 'react';
 import { Avatar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { indigo } from '@material-ui/core/colors';
 import { randomColor } from 'lib/color';
 
 const useStyle = makeStyles({
@@ -9,6 +8,7 @@ const useStyle = makeStyles({
     width: 32,
     height: 32,
     fontSize: 16,
+    paddingTop: 2,
     margin: '0 auto',
     backgroundColor: props => props.color[500],
     color: props => props.color[50]
