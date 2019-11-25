@@ -1,31 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Box,
   Button,
   TextField,
   Grid
 } from "@material-ui/core";
+import {
+  Edit,
+  Delete,
+  Cancel
+} from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { currentUser } from 'lib/auth';
-import { indigo } from '@material-ui/core/colors';
-import { Edit, Delete, Cancel } from '@material-ui/icons';
 import { updateComment, deleteComment } from 'lib/api';
 import { format_date } from 'lib/format';
+import UserIcon from 'components/lv1/UserIcon';
 
 const useStyles = makeStyles(theme => ({
   container: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '720px'
-  },
-  input: {
-    width: '400px'
-  },
-  button: {
-    color: indigo[900],
-    marginTop: theme.spacing(1)
+    width: 800
   },
 }));
 
@@ -34,6 +26,7 @@ export default function (props) {
     id,
     baseDetail,
     userId,
+    userEmail,
     createdAt
   } = props;
 
@@ -63,23 +56,25 @@ export default function (props) {
   }
 
   return (
-    <Grid className={classes.container}>
-      <Box>
+    <Grid container spacing={2} className={classes.container}>
+      <Grid item xs={1}>
+        <UserIcon id={userId} email={userEmail} />
+      </Grid>
+      <Grid item xs={5}>
         <TextField
           multiline
-          className={classes.input}
+          fullWidth
           value={detail}
           disabled={!(isOwnComment && isEditteble)}
           onChange={e => setDetail(e.target.value)}
         />
-      </Box>
-      <Box>{format_date(createdAt)}</Box>
+      </Grid>
+      <Grid item xs={3}>{format_date(createdAt)}</Grid>
       {
         isOwnComment ? (
           isEditteble ? (
-            <Box>
+            <Grid item xs={3}>
               <Button
-                className={classes.button}
                 onClick={resetEdition}>
                 <Cancel />
               </Button>
@@ -92,11 +87,10 @@ export default function (props) {
               }>
                 保存
               </Button>
-            </Box>
+            </Grid>
           ) : (
-            <Box>
+            <Grid item xs={3}>
               <Button
-                className={classes.button}
                 onClick={toggleEdittable}>
                 <Edit />
               </Button>
@@ -108,7 +102,7 @@ export default function (props) {
                 }>
                 <Delete />
               </Button>
-            </Box>
+            </Grid>
             )
         ) : <></>
       }

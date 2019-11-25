@@ -13,6 +13,7 @@ export default function ({ comments }) {
             id={comment.id}
             baseDetail={comment.detail}
             userId={comment.user_id}
+            userEmail={comment.user_email}
             createdAt={comment.created_at.toString()}
           />
         ))}
