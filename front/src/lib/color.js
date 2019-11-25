@@ -8,9 +8,6 @@ import {
 } from '@material-ui/core/colors';
 
 export const randomColor = str => {
-  const getRandomInt = max => {
-    return Math.floor(Math.random() * Math.floor(max));
-  }
   const colors = [
     red, pink, purple, deepPurple, indigo,
     blue, lightBlue, cyan, teal, green,
