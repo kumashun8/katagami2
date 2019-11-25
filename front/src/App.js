@@ -10,10 +10,21 @@ import Top from 'pages/Top';
 import MemberDetail from 'pages/MemberDetail';
 import SignupPage from 'pages/SignupPage';
 import LoginPage from 'pages/LoginPage';
+import Header from 'components/lv3/Header';
 import { currentUser, logout } from 'lib/auth';
+import { makeStyles } from '@material-ui/styles';
+import { indigo } from '@material-ui/core/colors';
+import { Container, Grid, Box } from '@material-ui/core';
+
+const useStyle = makeStyles(theme => ({
+  wrapper: {
+    margin: '0 auto'
+  }
+}));
 
 export default function () {
   const [loggedIn, setLoggedIn] = useState(currentUser());
+  const classes = useStyle();
 
   const handleLogout = () => {
     logout();
@@ -41,23 +52,8 @@ export default function () {
 
   return (
     <BrowserRouter>
-      {loggedIn ? (
-        <div>
-          <p>ようこそ</p>
-          <button onClick={handleLogout}>
-            ログアウト
-          </button>
-        </div>
-      ) : (
-        <p>ログインしてね</p>
-        )
-      }
-      
-      <div>
-        <ul>
-          <li><NavLink activeStyle={{ color: 'red' }} exact to='/'>Top</NavLink></li>
-        </ul>
-        <hr />
+      <Header handleLogout={handleLogout} />
+      <Box className={classes.wrapper}>
         <Switch>
           <Route path='/signup' render={() =>
             <SignupPage
@@ -74,7 +70,7 @@ export default function () {
           <PrivateRoute path='/members/:id' component={MemberDetail} />
           <PrivateRoute path='/' component={Top} />
         </Switch>
-      </div>
+      </Box>
     </BrowserRouter>
   );
 }

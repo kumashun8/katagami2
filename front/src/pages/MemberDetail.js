@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
   wrapper: {
     backgroundColor: indigo[50],
     color: indigo[900],
-    paddingTop: theme.spacing(2),
+    marginTop: theme.spacing(4),
+    paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(4)
   },
   container: {
