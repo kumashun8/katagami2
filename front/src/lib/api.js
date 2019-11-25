@@ -109,7 +109,7 @@ export const updateComment = async (props) => {
 export const deleteComment = async (props) => {
   const {
     id,
-    setLatest
+    handleDelete
   } = props;
 
   const body = new FormData();
@@ -117,7 +117,7 @@ export const deleteComment = async (props) => {
   await fetchPost({
     url: `${baseUrl}/comments/destroy/${id}`,
     body: body,
-    successAction: setLatest
+    successAction: handleDelete
   });
 }
 

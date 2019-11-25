@@ -34,15 +34,18 @@ export default function (props) {
     userId
   } = props;
 
-  const [detail, setDetail] = useState(baseDetail);
-  const [isEditteble, setIsEdittable] = useState(false);
-  const isOwnComment = userId.toString() === currentUser();
   const classes = useStyles();
+  const isOwnComment = userId.toString() === currentUser();
+  const [detail,           setDetail] = useState(baseDetail);
+  const [isEditteble, setIsEdittable] = useState(false);
+  const [isDeleted,     setIsDeleted] = useState(false);
 
   const toggleEdittable = () => {
     setIsEdittable(!isEditteble);
   }
-
+  const handleDelete = response => {
+    setIsDeleted(true);
+  }
   const resetEdition = () => {
     toggleEdittable();
     setDetail(baseDetail);
@@ -51,6 +54,10 @@ export default function (props) {
   useEffect(() => {
     setDetail(baseDetail);
   }, [baseDetail]);
+
+  if (isDeleted) {
+    return <></>;
+  }
 
   return (
     <Grid className={classes.container}>
@@ -89,7 +96,12 @@ export default function (props) {
                 onClick={toggleEdittable}>
                 <Edit />
               </Button>
-              <Button>
+                <Button onClick={() => 
+                  deleteComment({
+                    id,
+                    handleDelete
+                  })
+                }>
                 <Delete />
               </Button>
             </Box>
