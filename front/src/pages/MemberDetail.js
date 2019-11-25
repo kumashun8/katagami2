@@ -47,6 +47,7 @@ export default function (props) {
   }, [latest]);
 
   useEffect(() => {
+    // console.log(`useEffect! latest: ${latest}`);
     const handleGetComments = comments => {
       setComments(comments);
       setLoading(false);
@@ -70,10 +71,7 @@ export default function (props) {
       <h1>{member.id}. {member.name}</h1>
       <p>Age : {member.age}</p>
       <hr />
-      <CommentList
-        comments={comments}
-        setLatest={setLatest}
-      />
+      <CommentList comments={comments} />
       <CommentForm
         classes={classes}
         detail={comment}

@@ -31,9 +31,7 @@ export default function (props) {
   const {
     id,
     baseDetail,
-    created_at,
-    userId,
-    setLatest
+    userId
   } = props;
 
   const [detail, setDetail] = useState(baseDetail);
@@ -41,19 +39,18 @@ export default function (props) {
   const isOwnComment = userId.toString() === currentUser();
   const classes = useStyles();
 
-  const handleUpdate = response => {
-    setLatest(false);
-  }
-
   const toggleEdittable = () => {
     setIsEdittable(!isEditteble);
   }
 
   const resetEdition = () => {
     toggleEdittable();
-    console.log(baseDetail);
     setDetail(baseDetail);
   }
+
+  useEffect(() => {
+    setDetail(baseDetail);
+  }, [baseDetail]);
 
   return (
     <Grid className={classes.container}>
@@ -79,7 +76,7 @@ export default function (props) {
                 updateComment({
                   id,
                   detail,
-                  handleUpdate
+                  toggleEdittable
                 })
               }>
                 保存

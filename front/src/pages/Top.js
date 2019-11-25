@@ -24,6 +24,7 @@ export default function () {
   const [latest,  setLatest ] = useState(true);
 
   useEffect(() => {
+    // console.log(`useEffect! latest: ${latest}`);
     const handleGetMembers = members => {
       setMembers(members);
       setLoading(false);

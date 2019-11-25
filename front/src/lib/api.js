@@ -94,7 +94,7 @@ export const updateComment = async (props) => {
   const {
     id,
     detail,
-    handleUpdate
+    toggleEdittable
   } = props;
   const body = new FormData();
   body.append('detail', detail);
@@ -102,7 +102,7 @@ export const updateComment = async (props) => {
   await fetchPost({
     url: `${baseUrl}/comments/update/${id}`,
     body: body,
-    successAction: handleUpdate
+    successAction: toggleEdittable
   });
 }
 
@@ -145,7 +145,7 @@ const fetchGet = async (props) => {
   return await fetch(url)
     .then(response => response.json())
     .then(responseJson => {
-      console.log(responseJson);
+      // console.log(responseJson);
       if (successAction) {
         successAction(responseJson);
       }
@@ -174,9 +174,11 @@ const fetchPost = async(props) => {
   })
     .then(response => response.json())
     .then(responseJson => {
-      console.log(responseJson);
-      successAction(responseJson);
-      console.log('fetch is finished');
+      // console.log(responseJson);
+      if (successAction) {
+        successAction(responseJson);
+      }
+      // console.log('fetch is finished');
     })
     .catch(error => {
       console.error(error);
