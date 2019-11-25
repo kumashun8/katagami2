@@ -2,10 +2,12 @@ class CommentsController < ApplicationController
   protect_from_forgery
 
   def create
+    user = User.find(params[:user])
     @comment = Comment.create(
-      detail: params[:detail],
-      user:   User.find(params[:user]),
-      member: Member.find(params[:member])
+      detail:     params[:detail],
+      user:       user,
+      user_email: user.email,
+      member:     Member.find(params[:member])
     )
     render json: @comment
   end

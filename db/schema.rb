@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_23_022014) do
+ActiveRecord::Schema.define(version: 2019_11_25_065452) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.text "detail", null: false
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2019_11_23_022014) do
     t.bigint "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "user_email", null: false
     t.index ["member_id"], name: "index_comments_on_member_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
