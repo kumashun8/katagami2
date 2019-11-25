@@ -10,13 +10,15 @@ import { currentUser } from 'lib/auth';
 import { indigo } from '@material-ui/core/colors';
 import { Edit, Delete, Cancel } from '@material-ui/icons';
 import { updateComment, deleteComment } from 'lib/api';
+import { format_date } from 'lib/format';
 
 const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    width: '640px',
-    color: indigo[900]
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '720px'
   },
   input: {
     width: '400px'
@@ -31,7 +33,8 @@ export default function (props) {
   const {
     id,
     baseDetail,
-    userId
+    userId,
+    createdAt
   } = props;
 
   const classes = useStyles();
@@ -70,6 +73,7 @@ export default function (props) {
           onChange={e => setDetail(e.target.value)}
         />
       </Box>
+      <Box>{format_date(createdAt)}</Box>
       {
         isOwnComment ? (
           isEditteble ? (
