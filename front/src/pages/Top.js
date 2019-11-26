@@ -3,8 +3,17 @@ import { makeStyles } from '@material-ui/core/styles';
 import MemberList from 'components/lv4/MemberList';
 import MemberForm from 'components/lv4/MemberForm';
 import { fetchMembers, postMember } from 'lib/api';
+import { indigo, grey } from '@material-ui/core/colors';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
+  wrapper: {
+    backgroundColor: grey[50],
+    color: indigo[900],
+    marginTop: theme.spacing(4),
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(4)
+  },
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -36,7 +45,7 @@ export default function () {
   }, [latest]);
 
   return (
-    <div>
+    <Container className={classes.wrapper}>
       <MemberList
         loading={loading}
         members={members}
@@ -54,6 +63,6 @@ export default function () {
             setLatest
           })}
       />
-    </div>
+    </Container>
   );
 }

@@ -3,7 +3,6 @@ import {
   BrowserRouter,
   Switch,
   Route,
-  NavLink,
   Redirect
 } from 'react-router-dom';
 import Top from 'pages/Top';
@@ -13,12 +12,11 @@ import LoginPage from 'pages/LoginPage';
 import Header from 'components/lv3/Header';
 import { currentUser, logout } from 'lib/auth';
 import { makeStyles } from '@material-ui/styles';
-import { indigo } from '@material-ui/core/colors';
-import { Container, Grid, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
-    margin: '0 auto'
+    margin: '120px auto'
   }
 }));
 
@@ -70,7 +68,7 @@ export default function () {
           <PrivateRoute path='/members/:id' component={MemberDetail} />
           <PrivateRoute path='/' component={Top} />
         </Switch>
-      </Box>
+        </Box>
     </BrowserRouter>
   );
 }

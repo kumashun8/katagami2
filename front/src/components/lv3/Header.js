@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
     width: '100vw',
     height: 80,
     position: 'fixed',
+    margin: 0,
     top: 0,
     backgroundColor: indigo[500],
     color: indigo[50]
