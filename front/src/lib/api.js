@@ -128,10 +128,10 @@ export const fetchCommentsOfMember = async (id, handleGetComments) => {
   });
 }
 
-export const fetchCommentsOfUser = async (id, handleGetComments) => {
+export const fetchUserAndOwnComments = async (id, handleGetUser) => {
   await fetchGet({
-    url: `${baseUrl}/comments/users/${id}`,
-    successAction: handleGetComments
+    url: `${baseUrl}/users/${id}`,
+    successAction: handleGetUser
   });
 }
 
@@ -145,7 +145,7 @@ const fetchGet = async (props) => {
   return await fetch(url)
     .then(response => response.json())
     .then(responseJson => {
-      // console.log(responseJson);
+      console.log(responseJson);
       if (successAction) {
         successAction(responseJson);
       }

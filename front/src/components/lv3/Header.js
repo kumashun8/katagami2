@@ -28,11 +28,11 @@ export default function (props) {
     <AppBar postion='static'>
       <Toolbar>
         <Grid container className={classes.container}>
-          <Grid items xs={11}>
+          <Grid item xs={11}>
             <AppLogo />
           </Grid>
           {auth && (
-            <Grid items xs={1}>
+            <Grid item xs={1}>
               <UserMenu
                 id={auth}
                 handleLogout={handleLogout}
