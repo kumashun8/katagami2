@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom';
 import {
   IconButton,
   Menu,
-  MenuItem
+  MenuItem,
+  Modal,
+  Grid,
+  Button
 } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
+import { grey, indigo } from '@material-ui/core/colors';
 import UserIcon from 'components/lv1/UserIcon';
 
 const useStyle = makeStyles(theme => ({
@@ -17,6 +20,23 @@ const useStyle = makeStyles(theme => ({
   },
   menuItem: {
     padding: '6px 32px'
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalBody: {
+    width: 240,
+    height: 120,
+    padding: '16px 24px',
+    backgroundColor: grey[50]
+  },
+  text: {
+    paddingBottom: 8
+  },
+  button: {
+    margin: '0 auto'
   }
 }));
 
@@ -27,16 +47,24 @@ export default function (props) {
   } = props;
   const classes = useStyle();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const open = Boolean(anchorEl);
 
-  const handleCloseWith = action => {
-    action();
+  const handleSafetyLogout = () => {
+    setModalIsOpen(false);
     setAnchorEl(false);
+    handleLogout();
+  }
+
+  const handleModalOpen = () => {
+    setAnchorEl(false);
+    setModalIsOpen(true);
   }
 
   return (
     <div>
       <IconButton
+        aria-label='current user'
         aria-haspopup='true'
         aria-controls='menu-appbar'
         onClick={e => setAnchorEl(e.currentTarget)}
@@ -64,13 +92,44 @@ export default function (props) {
             className={classes.link}
           >
             マイページ
-           </Link>
+          </Link>
         </MenuItem>
-        <MenuItem className={classes.menuItem} onClick={() => handleCloseWith(handleLogout)}>
+        <MenuItem className={classes.menuItem} onClick={handleModalOpen}>
           ログアウト
         </MenuItem>
       </Menu>
+      <Modal
+        aria-labelledby="logunt-modal"
+        aria-describedby="logout-modal-description"
+        className={classes.modal}
+        open={modalIsOpen}
+        onClose={() => setModalIsOpen(false)}
+      >
+        <div className={classes.modalBody}>
+          <p className={classes.text}>ログアウトしますか？</p>
+          <Grid container>
+            <Grid xs={8}>
+              <Button
+                variant='contained'
+                color='primary'
+                className={classes.button}
+                onClick={handleSafetyLogout}
+              >
+                はい
+              </Button>
+            </Grid>
+            <Grid xs={4}>
+              <Button
+                variant='contained'
+                className={classes.button}
+                onClick={() => setModalIsOpen(false)}
+              >
+                いいえ
+              </Button>
+            </Grid>
+          </Grid>
+        </div>
+      </Modal>
     </div>
-    
   );
 }
