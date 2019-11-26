@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     render json: {
       user: user, 
-      comments: user.comments
+      comments: user.comments.order(created_at: 'DESC')
     }
   end
   

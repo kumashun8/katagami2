@@ -8,9 +8,8 @@ import {
   postComment,
   fetchUserAndOwnComments
 } from 'lib/api';
-import CommentList from 'components/lv4/CommentList';
-import CommentForm from 'components/lv4/CommentForm';
 import Container from 'components/lv4/Container';
+import CommentTable from 'components/lv4/CommentTable';
 
 export default function (props) {
   const { id } = props.match.params;
@@ -37,10 +36,7 @@ export default function (props) {
     <Container>
       <h1>{user.email}</h1>
       <hr />
-      <h2>コメント一覧</h2>
-      <ul>
-        {comments.map(comment => (<li key={comment.id}>{comment.detail}</li>))}
-      </ul>
+      <CommentTable comments={comments}/>
     </Container>
   );
 }
