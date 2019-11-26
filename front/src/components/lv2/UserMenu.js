@@ -8,11 +8,15 @@ import {
 } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import UserIcon from 'components/lv1/UserIcon';
-import { currentUser } from 'lib/auth';
 
 const useStyle = makeStyles(theme => ({
   link: {
-    textDecoration: 'none'
+    textDecoration: 'none',
+    alignItems: 'center',
+    color: grey[900]
+  },
+  menuItem: {
+    padding: '6px 32px'
   }
 }));
 
@@ -25,6 +29,11 @@ export default function (props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
+  const handleCloseWith = action => {
+    action();
+    setAnchorEl(false);
+  }
+
   return (
     <div>
       <IconButton
@@ -32,7 +41,7 @@ export default function (props) {
         aria-controls='menu-appbar'
         onClick={e => setAnchorEl(e.currentTarget)}
       >
-        <UserIcon size={40} email='kk' />
+        <UserIcon size={40} email={localStorage.getItem('email')} />
       </IconButton>
       <Menu
         id='menu-appbar'
@@ -49,15 +58,17 @@ export default function (props) {
         open={open}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuItem>
+        <MenuItem className={classes.menuItem} onClick={() => setAnchorEl(false)}>
           <Link
             to={`/users/${id}`}
             className={classes.link}
           >
             マイページ
-          </Link>
+           </Link>
         </MenuItem>
-        <MenuItem onClick={handleLogout}>ログアウト</MenuItem>
+        <MenuItem className={classes.menuItem} onClick={() => handleCloseWith(handleLogout)}>
+          ログアウト
+        </MenuItem>
       </Menu>
     </div>
     

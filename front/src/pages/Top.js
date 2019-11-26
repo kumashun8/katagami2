@@ -3,17 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import MemberList from 'components/lv4/MemberList';
 import MemberForm from 'components/lv4/MemberForm';
 import { fetchMembers, postMember } from 'lib/api';
-import { indigo, grey } from '@material-ui/core/colors';
-import { Container } from '@material-ui/core';
+import Container from 'components/lv4/Container';
 
 const useStyles = makeStyles(theme => ({
-  wrapper: {
-    backgroundColor: grey[50],
-    color: indigo[900],
-    marginTop: theme.spacing(4),
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(4)
-  },
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -45,7 +37,7 @@ export default function () {
   }, [latest]);
 
   return (
-    <Container className={classes.wrapper}>
+    <Container>
       <MemberList
         loading={loading}
         members={members}

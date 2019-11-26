@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
     render json: { 
       auth: user.id,
+      email: user.email,
       errors: format_error_messages(user)
     }
   end
@@ -39,6 +40,7 @@ class UsersController < ApplicationController
 
     render json: { 
       auth: auth,
+      email: user.email,
       errors: errors
     }
   end

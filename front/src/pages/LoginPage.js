@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import LoginForm from 'components/lv4/LoginForm'; 
 import { login } from 'lib/api';
 import { authenticate } from 'lib/auth';
+import Container from 'components/lv4/Container';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -33,9 +34,9 @@ export default function ({ auth, setAuth }) {
 
   let { from } = location.state || { from: { pathname: '/' } };
 
-  const handleAuth = ({ auth, errors }) => {
+  const handleAuth = ({ auth, email, errors }) => {
     if (auth) {
-      authenticate(auth);
+      authenticate(auth, email);
       setAuth(auth);
     } else {
       setErrors(errors);
@@ -52,7 +53,9 @@ export default function ({ auth, setAuth }) {
     auth ? (
       <Redirect to='/' />
     ) : (
-      <div>
+      <Container>
+        <h1>ログイン</h1>
+        <hr />
         <LoginForm
           classes={classes}
           email={email}
@@ -70,7 +73,7 @@ export default function ({ auth, setAuth }) {
           }
         />
         <Link to='/signup'>新規登録はこちら</Link>
-      </div>
+      </Container>
     )
   );
 }

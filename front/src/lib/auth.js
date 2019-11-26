@@ -1,6 +1,8 @@
-export const authenticate = auth => {
+export const authenticate = (auth, email) => {
+  console.log(email);
   if (auth) {
     localStorage.setItem('currentUser', auth);
+    localStorage.setItem('email', email);
   }
 }
 

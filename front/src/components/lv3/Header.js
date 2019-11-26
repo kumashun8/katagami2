@@ -1,11 +1,13 @@
 import React from 'react';
-import { Grid, AppBar, Toolbar, IconButton } from '@material-ui/core';
+import {
+  Grid,
+  AppBar,
+  Toolbar
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { indigo } from '@material-ui/core/colors';
-import AppLogo from 'components/lv1/AppLogo';
 import { currentUser } from 'lib/auth';
+import AppLogo from 'components/lv1/AppLogo';
 import UserMenu from 'components/lv2/UserMenu';
-import UserIcon from 'components/lv1/UserIcon';
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,7 +27,7 @@ export default function (props) {
   const auth = currentUser();
 
   return (
-    <AppBar postion='static'>
+    <AppBar postion='static' >
       <Toolbar>
         <Grid container className={classes.container}>
           <Grid item xs={11}>

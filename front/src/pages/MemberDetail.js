@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { currentUser } from 'lib/auth';
-import { Container } from '@material-ui/core';
-import { indigo, grey } from '@material-ui/core/colors';
 import {
   fetchMember,
   fetchCommentsOfMember,
@@ -10,27 +7,9 @@ import {
 } from 'lib/api';
 import CommentList from 'components/lv4/CommentList';
 import CommentForm from 'components/lv4/CommentForm';
-
-const useStyles = makeStyles(theme => ({
-  wrapper: {
-    backgroundColor: grey[50],
-    color: indigo[900],
-    marginTop: theme.spacing(4),
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(4)
-  },
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '400px'
-  },
-  button: {
-    marginTop: theme.spacing(1),
-  },
-}));
+import Container from 'components/lv4/Container';
 
 export default function (props) {
-  const classes = useStyles();
   const { id } = props.match.params;
   const [member,     setMember] = useState({});
   const [comments, setComments] = useState([]);
@@ -68,13 +47,12 @@ export default function (props) {
   };
   
   return (
-    <Container className={classes.wrapper}>
+    <Container>
       <h1>{member.id}. {member.name}</h1>
       <p>Age : {member.age}</p>
       <hr />
       <CommentList comments={comments} />
       <CommentForm
-        classes={classes}
         detail={comment}
         handleChangeDetail={setComment}
         handlePost={() =>
