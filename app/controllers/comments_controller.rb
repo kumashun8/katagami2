@@ -26,9 +26,4 @@ class CommentsController < ApplicationController
     @comments = Member.find(params[:id]).comments.order(created_at: "DESC")
     render json: @comments
   end
-
-  def index_by_user
-    @comments = User.find(params[:id]).comments
-    render json: @comments
-  end
 end

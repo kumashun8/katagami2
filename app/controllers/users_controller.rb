@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
   protect_from_forgery
+
+  def show
+    user = User.find(params[:id])
+    render json: {
+      user: user, 
+      comments: user.comments
+    }
+  end
   
   def signup
     user = User.create(
