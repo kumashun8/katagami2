@@ -41,9 +41,7 @@ export default function ({ comments }) {
         <TableBody>
           {comments.map(comment => (
             <TableRow key={comment.id}>
-              <TableCell component='th' scope='row'>
-                {comment.member_id}
-              </TableCell>
+              <TableCell component='th' scope='row'>{comment.member_id}</TableCell>
               <TableCell align='left'>{comment.detail}</TableCell>
               <TableCell align='left'>{format_date(comment.created_at)}</TableCell>
             </TableRow>

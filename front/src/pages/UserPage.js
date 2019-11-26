@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { currentUser } from 'lib/auth';
-import { indigo, grey } from '@material-ui/core/colors';
-import {
-  fetchMember,
-  fetchCommentsOfMember,
-  postComment,
-  fetchUserAndOwnComments
-} from 'lib/api';
+import { fetchUserAndOwnComments } from 'lib/api';
 import Container from 'components/lv4/Container';
 import CommentTable from 'components/lv4/CommentTable';
 
