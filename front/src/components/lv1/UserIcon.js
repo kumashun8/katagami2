@@ -5,9 +5,9 @@ import { randomColor } from 'lib/color';
 
 const useStyle = makeStyles({
   icon: {
-    width: 32,
-    height: 32,
-    fontSize: 16,
+    width: props => props.size,
+    height: props => props.size,
+    fontSize: props => props.size / 2,
     paddingTop: 2,
     margin: '0 auto',
     backgroundColor: props => props.color[500],
@@ -15,8 +15,11 @@ const useStyle = makeStyles({
   },
 });
 
-export default function ({ email, id }) {
-  const classes = useStyle({color: randomColor(email)});
+export default function ({ email, id, size }) {
+  const classes = useStyle({
+    color: randomColor(email),
+    size: size
+  });
 
   return (
     <Avatar className={classes.icon}>

@@ -58,7 +58,11 @@ export default function (props) {
   return (
     <Grid container spacing={2} className={classes.container}>
       <Grid item xs={1}>
-        <UserIcon id={userId} email={userEmail} />
+        <UserIcon
+          id={userId}
+          email={userEmail}
+          size={32}
+        />
       </Grid>
       <Grid item xs={5}>
         <TextField

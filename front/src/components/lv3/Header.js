@@ -1,20 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Grid } from '@material-ui/core';
+import { Grid, AppBar, Toolbar, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { indigo } from '@material-ui/core/colors';
+import AppLogo from 'components/lv1/AppLogo';
+import { currentUser } from 'lib/auth';
+import UserMenu from 'components/lv2/UserMenu';
+import UserIcon from 'components/lv1/UserIcon';
 
 
 const useStyles = makeStyles(theme => ({
   container: {
-    width: '100vw',
-    height: 80,
-    position: 'fixed',
-    margin: 0,
-    top: 0,
-    backgroundColor: indigo[500],
-    color: indigo[50]
+    alignItems: 'center'
   },
+  item: {
+  }
 }));
 
 export default function (props) {
@@ -23,13 +22,22 @@ export default function (props) {
   } = props;
 
   const classes = useStyles();
+  const auth = currentUser();
 
   return (
-    <Grid container spacing={2} className={classes.container}>
-      <Grid item xs={8}>
-        <Link to='/'>Sample App</Link>
-      </Grid>
-      <Grid item xs={4} onClick={handleLogout}>b</Grid>
-    </Grid>
+    <AppBar postion='static'>
+      <Toolbar>
+        <Grid container className={classes.container}>
+          <Grid items xs={11}>
+            <AppLogo />
+          </Grid>
+          {auth && (
+            <Grid items xs={1}>
+              <UserMenu />
+            </Grid>
+          )}
+        </Grid>
+      </Toolbar>
+    </AppBar>
   );
 }
