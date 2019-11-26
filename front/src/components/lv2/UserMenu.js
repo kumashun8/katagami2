@@ -13,15 +13,15 @@ import { currentUser } from 'lib/auth';
 const useStyle = makeStyles(theme => ({
   link: {
     textDecoration: 'none'
-  },
-  logo: {
-    fontSize: props => props.size,
-    padding: props => props.size / 4,
-    margin: 0,
-    color: grey[50],
   }
-}))
-export default function () {
+}));
+
+export default function (props) {
+  const {
+    id,
+    handleLogout
+  } = props;
+  const classes = useStyle();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -49,8 +49,15 @@ export default function () {
         open={open}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuItem>マイページ</MenuItem>
-        <MenuItem >ログアウト</MenuItem>
+        <MenuItem>
+          <Link
+            to={`/users/${id}`}
+            className={classes.link}
+          >
+            マイページ
+          </Link>
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>ログアウト</MenuItem>
       </Menu>
     </div>
     

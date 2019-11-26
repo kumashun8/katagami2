@@ -33,7 +33,10 @@ export default function (props) {
           </Grid>
           {auth && (
             <Grid items xs={1}>
-              <UserMenu />
+              <UserMenu
+                id={auth}
+                handleLogout={handleLogout}
+              />
             </Grid>
           )}
         </Grid>

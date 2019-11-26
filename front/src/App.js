@@ -5,14 +5,15 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
+import { makeStyles } from '@material-ui/styles';
+import { Box } from '@material-ui/core';
+import { currentUser, logout } from 'lib/auth';
+import Header from 'components/lv3/Header';
 import Top from 'pages/Top';
 import MemberDetail from 'pages/MemberDetail';
 import SignupPage from 'pages/SignupPage';
 import LoginPage from 'pages/LoginPage';
-import Header from 'components/lv3/Header';
-import { currentUser, logout } from 'lib/auth';
-import { makeStyles } from '@material-ui/styles';
-import { Box } from '@material-ui/core';
+import UserPage from 'pages/UserPage';
 
 const useStyle = makeStyles(theme => ({
   wrapper: {
@@ -65,6 +66,7 @@ export default function () {
               setAuth={setLoggedIn}
             />}
           />
+          <PrivateRoute path='/users/:id' component={UserPage} />
           <PrivateRoute path='/members/:id' component={MemberDetail} />
           <PrivateRoute path='/' component={Top} />
         </Switch>
