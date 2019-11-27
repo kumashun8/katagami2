@@ -108,7 +108,7 @@ export default function (props) {
         <div className={classes.modalBody}>
           <p className={classes.text}>ログアウトしますか？</p>
           <Grid container>
-            <Grid xs={8}>
+            <Grid item xs={8}>
               <Button
                 variant='contained'
                 color='primary'
@@ -118,7 +118,7 @@ export default function (props) {
                 はい
               </Button>
             </Grid>
-            <Grid xs={4}>
+            <Grid item xs={4}>
               <Button
                 variant='contained'
                 className={classes.button}

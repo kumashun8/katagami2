@@ -30,25 +30,37 @@ export default function (props) {
     createdAt
   } = props;
 
+  let _baseDetail = baseDetail;
   const classes = useStyles();
   const isOwnComment = userId.toString() === currentUser();
-  const [detail,           setDetail] = useState(baseDetail);
+  const [detail, setDetail] = useState(baseDetail);
+  const [tmpDetail, setTmpDetail] = useState(baseDetail);
   const [isEditteble, setIsEdittable] = useState(false);
-  const [isDeleted,     setIsDeleted] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
+  
 
   const toggleEdittable = () => {
     setIsEdittable(!isEditteble);
+  }
+  const handleUpdate = () => {
+    updateComment({
+      id,
+      detail,
+      toggleEdittable
+    });
+    setTmpDetail(detail);
   }
   const handleDelete = response => {
     setIsDeleted(true);
   }
   const resetEdition = () => {
     toggleEdittable();
-    setDetail(baseDetail);
+    setDetail(tmpDetail);
   }
 
   useEffect(() => {
     setDetail(baseDetail);
+    setTmpDetail(baseDetail);
   }, [baseDetail]);
 
   if (isDeleted) {
@@ -82,13 +94,10 @@ export default function (props) {
                 onClick={resetEdition}>
                 <Cancel />
               </Button>
-              <Button onClick={() =>
-                updateComment({
-                  id,
-                  detail,
-                  toggleEdittable
-                })
-              }>
+              <Button
+                disabled={detail.length === 0}
+                onClick={handleUpdate}
+              >
                 保存
               </Button>
             </Grid>

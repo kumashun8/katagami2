@@ -13,7 +13,8 @@ class CommentsController < ApplicationController
   end
 
   def update
-    Comment.find(params[:id]).update(detail: params[:detail])
+    @comment = Comment.find(params[:id])
+    @comment.update(detail: params[:detail])
     render json: @comment
   end
 
