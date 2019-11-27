@@ -27,7 +27,7 @@ $ cd front && yarn
 - アプリ起動
 ```
 $ docker-compose up -d (APIサーバ)
-$ dc front && yarn start (webサーバ)
+$ cd front && yarn start (webサーバ)
 ```
 - DB接続
 ```
