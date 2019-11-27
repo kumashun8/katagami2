@@ -1,24 +1,38 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+卒業研究のテーマである画像データのアノテーションツール開発のために使用したい技術を使ってみるためのサンプルアプリケーション。
 
-Things you may want to cover:
+## Main Environment
 
-* Ruby version
+* Ruby : 2.6.5
 
-* System dependencies
+* Rails : 5.2.3
 
-* Configuration
+* react : 16.12.0
 
-* Database creation
+* react-router-dom : 5.1.2
 
-* Database initialization
+* @material-ui/core : 4.6.1
 
-* How to run the test suite
+* mysql : 5.7
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## How to Use
+- セットアップ
+```
+$ git clone https://github.com/8810KMKM/katagami2
+$ docker-compose build
+$ docker-compose run web rails db:migrate
+$ cd front && yarn
+```
+- アプリ起動
+```
+$ docker-compose up -d (APIサーバ)
+$ dc front && yarn start (webサーバ)
+```
+- DB接続
+```
+$ docker-compose up -d
+$ docker exec -it katagami2_web_1 bash (コンテナに入る)
+$ mysql -h db -u root -p
+$ *Enter password*
+```
